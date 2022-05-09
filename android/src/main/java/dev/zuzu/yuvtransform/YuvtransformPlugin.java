@@ -37,6 +37,7 @@ public class YuvtransformPlugin implements FlutterPlugin, MethodCallHandler {
       int[] strides = call.argument("strides");
       int width = call.argument("width");
       int height = call.argument("height");
+      int quality = call.argument("quality");
 
       try {
           byte[] data = YuvConverter.NV21toJPEG(YuvConverter.YUVtoNV21(bytesList, strides, width, height), width, height, 100);
@@ -46,7 +47,7 @@ public class YuvtransformPlugin implements FlutterPlugin, MethodCallHandler {
           matrix.postRotate(90);
           Bitmap finalbitmap = Bitmap.createBitmap(bitmapRaw, 0, 0, bitmapRaw.getWidth(), bitmapRaw.getHeight(), matrix, true);
           ByteArrayOutputStream outputStreamCompressed = new ByteArrayOutputStream();
-          finalbitmap.compress(Bitmap.CompressFormat.JPEG, 60, outputStreamCompressed);
+          finalbitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStreamCompressed);
 
           result.success(outputStreamCompressed.toByteArray());
           outputStreamCompressed.close();

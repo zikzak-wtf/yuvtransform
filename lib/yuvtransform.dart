@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 class Yuvtransform {
   static const MethodChannel _channel = MethodChannel('yuvtransform');
 
-  static Future<Uint8List> yuvTransform(CameraImage image) async {
+  static Future<Uint8List> yuvTransform(CameraImage image,
+      {int? quality = 60}) async {
     List<int> strides = Int32List(image.planes.length * 2);
     int index = 0;
     // We need to transform the image to Uint8List so that the native code could
@@ -23,7 +24,8 @@ class Yuvtransform {
       'platforms': data,
       'height': image.height,
       'width': image.width,
-      'strides': strides
+      'strides': strides,
+      'quality': quality
     });
 
     return imageJpeg;
