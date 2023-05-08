@@ -23,7 +23,7 @@ class _YuvTransformScreenState extends State<YuvTransformScreen>
     super.initState();
     // Registers the page to observer for life cycle managing.
     _imageResultProcessorService = ImageResultProcessorService();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     _subscription.add(_imageResultProcessorService.queue.listen((event) {
       _isProcessing = false;
     }));
@@ -32,7 +32,7 @@ class _YuvTransformScreenState extends State<YuvTransformScreen>
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     // Dispose all streams!
     _subscription.forEach((element) {
       element.cancel();
